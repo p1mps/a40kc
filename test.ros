@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="a16e-43aa-e260-7f9f" name="test" battleScribeVersion="2.01" gameSystemId="28ec-711c-d87f-3aeb" gameSystemName="Warhammer 40,000 8th Edition" gameSystemRevision="57" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="7.0"/>
+    <cost name="pts" costTypeId="points" value="130.0"/>
+  </costs>
+  <costLimits/>
+  <forces>
+    <force id="71fa-770d-856b-71b0" name="Patrol Detachment" entryId="a0c7-2a71-bae0-215d" catalogueId="53e9d88f-7463-8c27-fe67-e1a0d1ed0287" catalogueRevision="122" catalogueName="Imperium - Astra Militarum">
+      <rules/>
+      <profiles/>
+      <selections>
+        <selection id="62c5-a75b-69f8-8cab" name="Regimental Doctrine" entryId="099d-e62d-107e-d64f::73fc-bc45-dbdd-417d" number="1" type="upgrade">
+          <rules/>
+          <profiles/>
+          <selections>
+            <selection id="64a0-0808-90b6-1504" name="Astra Millitarum" entryId="099d-e62d-107e-d64f::3041-5432-850f-22dd::4188-7aa5-87bf-35a6" entryGroupId="099d-e62d-107e-d64f::3041-5432-850f-22dd::afa1-3564-cfe2-602b" number="1" type="upgrade">
+              <rules/>
+              <profiles/>
+              <selections/>
+              <costs>
+                <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="0.0"/>
+                <cost name="pts" costTypeId="points" value="0.0"/>
+              </costs>
+              <categories/>
+            </selection>
+          </selections>
+          <costs>
+            <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="0.0"/>
+            <cost name="pts" costTypeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="edca-bec2-2d95-7bb6" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true">
+              <rules/>
+              <profiles/>
+            </category>
+          </categories>
+        </selection>
+        <selection id="678c-84c5-dfd7-75f2" name="Commissar Yarrick" entryId="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::1fe0e11a-5174-b4e9-842e-b254870ae161" book="Codex: Astra Militarum" page="55" number="1" type="model">
+          <rules/>
+          <profiles>
+            <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::c101-cc44-b43e-eee8" name="Commissar Yarrick" book="Codex: Astra Militarum" page="55" hidden="false" profileTypeId="800f-21d0-4387-c943" profileTypeName="Unit">
+              <profiles/>
+              <rules/>
+              <infoLinks/>
+              <modifiers/>
+              <characteristics>
+                <characteristic name="M" characteristicTypeId="0bdf-a96e-9e38-7779" value="6&quot;"/>
+                <characteristic name="WS" characteristicTypeId="e7f0-1278-0250-df0c" value="2+"/>
+                <characteristic name="BS" characteristicTypeId="381b-eb28-74c3-df5f" value="2+"/>
+                <characteristic name="S" characteristicTypeId="2218-aa3c-265f-2939" value="3"/>
+                <characteristic name="T" characteristicTypeId="9c9f-9774-a358-3a39" value="4"/>
+                <characteristic name="W" characteristicTypeId="f330-5e6e-4110-0978" value="4"/>
+                <characteristic name="A" characteristicTypeId="13fc-b29b-31f2-ab9f" value="3"/>
+                <characteristic name="Ld" characteristicTypeId="00ca-f8b8-876d-b705" value="9"/>
+                <characteristic name="Save" characteristicTypeId="c0df-df94-abd7-e8d3" value="4+"/>
+              </characteristics>
+            </profile>
+            <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::3da9-3795-a0e7-6c37" name="Power Field" hidden="false" profileTypeId="72c5eafc-75bf-4ed9-b425-78009f1efe82" profileTypeName="Abilities">
+              <profiles/>
+              <rules/>
+              <infoLinks/>
+              <modifiers/>
+              <characteristics>
+                <characteristic name="Description" characteristicTypeId="21befb24-fc85-4f52-a745-64b2e48f8228" value="Commisar Yarrick has a 4+ invulnerable save."/>
+              </characteristics>
+            </profile>
+            <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::7c0d-e994-6252-7d93" name="Hero of Hades Hive" hidden="false" profileTypeId="72c5eafc-75bf-4ed9-b425-78009f1efe82" profileTypeName="Abilities">
+              <profiles/>
+              <rules/>
+              <infoLinks/>
+              <modifiers/>
+              <characteristics>
+                <characteristic name="Description" characteristicTypeId="21befb24-fc85-4f52-a745-64b2e48f8228" value="You can re-roll hit rolls of 1 made for friendly ASTRA MILITARUM units within 6&quot; of Commissar Yarrick.  You may re-roll and failed hit rolls for friendly ASTRA MILITARUM units within 6&quot; of Commissar Yarrick when attacking ORK units."/>
+              </characteristics>
+            </profile>
+            <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::820c-fdd8-d976-96dc" name="Iron Will" hidden="false" profileTypeId="72c5eafc-75bf-4ed9-b425-78009f1efe82" profileTypeName="Abilities">
+              <profiles/>
+              <rules/>
+              <infoLinks/>
+              <modifiers/>
+              <characteristics>
+                <characteristic name="Description" characteristicTypeId="21befb24-fc85-4f52-a745-64b2e48f8228" value="Roll a D6 each time Commissar Yarrick loses his final wound; on a roll of 3+ that wound is not lost."/>
+              </characteristics>
+            </profile>
+            <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::6281-38b4-5c39-a1dd::f5f1-324f-5ba1-c4ae" name="Summary Execution" hidden="false" profileTypeId="72c5eafc-75bf-4ed9-b425-78009f1efe82" profileTypeName="Abilities">
+              <profiles/>
+              <rules/>
+              <infoLinks/>
+              <modifiers/>
+              <characteristics>
+                <characteristic name="Description" characteristicTypeId="21befb24-fc85-4f52-a745-64b2e48f8228" value="The first time an Astra Militarum unit fails a Morale test during the Morale phase whilst it is within 6&quot; of any friendly Commissars, you can execute a model. If you do, one model of your choice in that unit is slain and the Morale test is re- rolled (do not include this slain model when re-rolling the Morale test)."/>
+              </characteristics>
+            </profile>
+            <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::d03c-9b87-a0f8-16b0::74b0-e2c2-29bf-2997" name="Aura of Discipline" hidden="false" profileTypeId="72c5eafc-75bf-4ed9-b425-78009f1efe82" profileTypeName="Abilities">
+              <profiles/>
+              <rules/>
+              <infoLinks/>
+              <modifiers/>
+              <characteristics>
+                <characteristic name="Description" characteristicTypeId="21befb24-fc85-4f52-a745-64b2e48f8228" value="Any friendly ASTRA MILITARUM units within 6&quot; of a COMMISSAR can use his Leadership instead of their own."/>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="d736-6211-9fd4-b312" name="Bale Eye" entryId="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::44d2-8443-1275-1391" page="0" number="1" type="upgrade">
+              <rules/>
+              <profiles>
+                <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::ab47-68d7-70bb-a00c" name="Bale Eye" book="Codex: Astra Militarum" page="55" hidden="false" profileTypeId="d5f97c0b-9fc9-478d-aa34-a7c414d3ea48" profileTypeName="Weapon">
+                  <profiles/>
+                  <rules/>
+                  <infoLinks/>
+                  <modifiers/>
+                  <characteristics>
+                    <characteristic name="Range" characteristicTypeId="6fa97fa8-ea74-4a27-a0fb-bc4e5f367464" value="6&quot;"/>
+                    <characteristic name="Type" characteristicTypeId="077c342f-d7b9-45c6-b8af-88e97cafd3a2" value="Pistol 1"/>
+                    <characteristic name="S" characteristicTypeId="59b1-319e-ec13-d466" value="3"/>
+                    <characteristic name="AP" characteristicTypeId="75aa-a838-b675-6484" value="-2"/>
+                    <characteristic name="D" characteristicTypeId="ae8a-3137-d65b-4ca7" value="1"/>
+                    <characteristic name="Abilities" characteristicTypeId="837d-5e63-aeb7-1410" value=""/>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections/>
+              <costs>
+                <cost name="pts" costTypeId="points" value="0.0"/>
+                <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="0.0"/>
+              </costs>
+              <categories/>
+            </selection>
+            <selection id="a24e-1a89-5435-09dd" name="Power Klaw" entryId="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::f420-56fe-bf58-b5c1" page="0" number="1" type="upgrade">
+              <rules/>
+              <profiles>
+                <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::f7bf-3f40-091f-ecd1" name="Power Klaw" hidden="false" profileTypeId="d5f97c0b-9fc9-478d-aa34-a7c414d3ea48" profileTypeName="Weapon">
+                  <profiles/>
+                  <rules/>
+                  <infoLinks/>
+                  <modifiers/>
+                  <characteristics>
+                    <characteristic name="Range" characteristicTypeId="6fa97fa8-ea74-4a27-a0fb-bc4e5f367464" value="-"/>
+                    <characteristic name="Type" characteristicTypeId="077c342f-d7b9-45c6-b8af-88e97cafd3a2" value="Melee"/>
+                    <characteristic name="S" characteristicTypeId="59b1-319e-ec13-d466" value="x2"/>
+                    <characteristic name="AP" characteristicTypeId="75aa-a838-b675-6484" value="-3"/>
+                    <characteristic name="D" characteristicTypeId="ae8a-3137-d65b-4ca7" value="D3"/>
+                    <characteristic name="Abilities" characteristicTypeId="837d-5e63-aeb7-1410" value="When attacking with this weapon, you must subtract 1 from the hit roll."/>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections/>
+              <costs>
+                <cost name="pts" costTypeId="points" value="0.0"/>
+                <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="0.0"/>
+              </costs>
+              <categories/>
+            </selection>
+            <selection id="7a95-0b57-f45b-a17e" name="Storm bolter" entryId="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::019f-8be8-ddb3-fa14::2b03-8d64-3711-f300" number="1" type="upgrade">
+              <rules/>
+              <profiles>
+                <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::019f-8be8-ddb3-fa14::df42-5dc2-4e53-ec49::505e-a5aa-edab-6d5b" name="Storm bolter" book="" page="" hidden="false" profileTypeId="d5f97c0b-9fc9-478d-aa34-a7c414d3ea48" profileTypeName="Weapon">
+                  <profiles/>
+                  <rules/>
+                  <infoLinks/>
+                  <modifiers/>
+                  <characteristics>
+                    <characteristic name="Range" characteristicTypeId="6fa97fa8-ea74-4a27-a0fb-bc4e5f367464" value="24&quot;"/>
+                    <characteristic name="Type" characteristicTypeId="077c342f-d7b9-45c6-b8af-88e97cafd3a2" value="Rapid Fire 2"/>
+                    <characteristic name="S" characteristicTypeId="59b1-319e-ec13-d466" value="4"/>
+                    <characteristic name="AP" characteristicTypeId="75aa-a838-b675-6484" value="0"/>
+                    <characteristic name="D" characteristicTypeId="ae8a-3137-d65b-4ca7" value="1"/>
+                    <characteristic name="Abilities" characteristicTypeId="837d-5e63-aeb7-1410" value="-"/>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections/>
+              <costs>
+                <cost name="pts" costTypeId="points" value="0.0"/>
+                <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="0.0"/>
+              </costs>
+              <categories/>
+            </selection>
+            <selection id="a452-0c83-0dfe-1a9b" name="Bolt pistol" entryId="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::b238-74f6-2685-82a8::0334-f487-8229-0c1a" number="1" type="upgrade">
+              <rules/>
+              <profiles>
+                <profile id="99a162d9-4854-cc3b-c35e-b0c3a3cc77d6::b238-74f6-2685-82a8::45bf-2847-b181-19e4::e6d5-677a-d8ed-f6a5" name="Bolt pistol" book="" hidden="false" profileTypeId="d5f97c0b-9fc9-478d-aa34-a7c414d3ea48" profileTypeName="Weapon">
+                  <profiles/>
+                  <rules/>
+                  <infoLinks/>
+                  <modifiers/>
+                  <characteristics>
+                    <characteristic name="Range" characteristicTypeId="6fa97fa8-ea74-4a27-a0fb-bc4e5f367464" value="12&quot;"/>
+                    <characteristic name="Type" characteristicTypeId="077c342f-d7b9-45c6-b8af-88e97cafd3a2" value="Pistol 1"/>
+                    <characteristic name="S" characteristicTypeId="59b1-319e-ec13-d466" value="4"/>
+                    <characteristic name="AP" characteristicTypeId="75aa-a838-b675-6484" value="0"/>
+                    <characteristic name="D" characteristicTypeId="ae8a-3137-d65b-4ca7" value="1"/>
+                    <characteristic name="Abilities" characteristicTypeId="837d-5e63-aeb7-1410" value="-"/>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections/>
+              <costs>
+                <cost name="pts" costTypeId="points" value="0.0"/>
+                <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="0.0"/>
+              </costs>
+              <categories/>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" costTypeId="points" value="130.0"/>
+            <cost name=" PL" costTypeId="e356-c769-5920-6e14" value="7.0"/>
+          </costs>
+          <categories>
+            <category id="f631-70b7-d71b-53de" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="e79f-4b1b-ef72-813a" name="Officio Prefectus" entryId="5988-2982-1dde-215b" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="7ae8-fb78-ba4f-3b86" name="Astra Militarum" entryId="3263-4233-4344-6228" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="f830-72d1-73ca-2169" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="ed5c-ef17-3e65-1ed5" name="Astra Militarum" entryId="3263-4233-4344-6228" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="6dd5-9fd7-56dd-7a12" name="Character" entryId="ef18-746a-369f-43a4" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="53c8-326d-f6aa-21de" name="Commissar" entryId="fa52-8fb7-1c87-80e6" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="c79d-11f8-a82c-40e3" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="91e8-d14e-8431-fcb5" name="Imperium" entryId="84e2-9fa9-ebe6-1d18" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="7c6c-ca73-fd93-4326" name="Officio Prefectus" entryId="5988-2982-1dde-215b" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+            <category id="1024-4343-2749-3511" name="Yarrik" entryId="0fc0-4e00-a978-3f55" primary="false">
+              <rules/>
+              <profiles/>
+            </category>
+          </categories>
+        </selection>
+      </selections>
+      <categories>
+        <category id="7954-3924-f068-bf2d" name="Uncategorised" entryId="(No Category)" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="7208-cfd1-26ec-98da" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="3c60-a46c-caba-9df6" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="7467-526c-077b-19bd" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="fa06-f58b-1afd-4844" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="bfce-b27e-30b9-adcb" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="d2b4-f8cc-b4b6-7944" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="c4f8-4241-ec80-83b0" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="1909-dae6-4ac4-fdef" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="82d9-f358-fada-51d2" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="8772-70ef-5752-be8c" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="9f80-9ba9-8fe1-fdc0" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+        <category id="02a9-a3b0-81f7-ca23" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false">
+          <rules/>
+          <profiles/>
+        </category>
+      </categories>
+      <forces/>
+    </force>
+  </forces>
+</roster>
