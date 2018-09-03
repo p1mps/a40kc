@@ -1,10 +1,11 @@
-(ns a40kc.core)
+(ns a40kc.core
+  (:gen-class))
 
 (require '[clojure.xml :as xml])
 (require '[clojure.java.io :as io])
-(require '[clj-xpath.core :as xpath])
+(require '(xenopath [xpath :as xpath] [dom :as dom]))
 
-(def xml-file (slurp "Mordians.ros"))
+(def xml-file (slurp "test.ros"))
 
 ;; (defn parse-xml
 ;;   []
@@ -23,9 +24,9 @@
 ;;   (xpath/xml->doc (slurp "Mordians.ros")))
 
 (defn parse-xml []
-  (xpath/$x "//selection[@type='model']//characteristic" xml-file))
+  (dom/name (xpath/lookup-node "//selection" xml-file)))
 
 (defn -main
   "I don't do a whole lot."
   [& args]
-  (print (map #(println %) (parse-xml))))
+  (print parse-xml))
