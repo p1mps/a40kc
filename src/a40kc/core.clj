@@ -7,11 +7,17 @@
 
 (def xml-file (slurp "test.ros"))
 
-(def models (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Unit']" xml-file)))
+(def models (xpath/lookup-nodeset "//selection[@type='model']" xml-file))
 (def weapons (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Weapon']" xml-file)))
 (def weapons-stats (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Weapon']//characteristic" xml-file)))
 
-(doseq [x models] (println (:name x)))
+(for [x (xml-seq
+         (xml/parse (java.io.File. "test.ros" )))
+      :when (= :selection (:tag x))
+      :when (= "model" (:type (:attrs x)))]
+  (:type (:attrs x)))
+
+(doseq [x models] (println x))
 (doseq [x weapons] (println (:name x)))
 (doseq [x weapons-stats] (println (:name x) (:value x)))
 
