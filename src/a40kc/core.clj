@@ -11,11 +11,13 @@
 (def weapons (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Weapon']" xml-file)))
 (def weapons-stats (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Weapon']//characteristic" xml-file)))
 
-(for [x (xml-seq
-         (xml/parse (java.io.File. "test.ros" )))
-      :when (= :selection (:tag x))
-      :when (= "model" (:type (:attrs x)))]
-  (:type (:attrs x)))
+(def data (for [x (xml-seq
+                   (xml/parse (java.io.File. "test.ros" )))
+                :when (= :selections (:tag x))]
+            (first (get-in x [:content]))))
+
+(pprint data)
+
 
 (doseq [x models] (println x))
 (doseq [x weapons] (println (:name x)))
