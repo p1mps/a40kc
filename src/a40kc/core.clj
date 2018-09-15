@@ -1,5 +1,6 @@
 (ns a40kc.core
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.zip :as zip]))
 
 ;; (require '[clojure.xml :as xml])
 ;; (require '[clojure.java.io :as io])
@@ -19,15 +20,51 @@
 
 (def selections
   (xml-> data
-          :forces
-          :force
-          :selections
-          :selection
-          :profiles
-          :profile
-          (attr= :profileTypeName "Unit")
-          zip/node
-  ))
+         :forces
+         :force
+         :selections
+         :selection
+         :profiles
+         :profile
+         (attr= :profileTypeName "Unit")
+         ))
+
+(extract-characteristics selections "T")
+
+(defn extract-characteristics [node c] 
+  [:name (:name (:attrs (zip/node (first node))))
+   (select-keys (:attrs (first (apply #(xml-> % :characteristics :characteristic (attr= :name c) zip/node) node))) [:name :value])])
+
+
+
+(defn extract-characteristics
+  [value]
+  (xml->
+   selections
+   :characteristics
+   :characteristic
+   ))
+
+(for [selection selections
+      :let [
+            c (xml->
+               selection
+               :characteristics
+               :characteristic
+               (attr= :name "WS")
+               zip/node)
+            ]]
+  c)
+
+(def map
+  {:units
+   [
+    {
+     :name (get-in (first selections) [:attrs :name])
+     :weapons (get-in (:content selections) [:tag])
+     }
+    ]
+   })
 
 (defn print-characteristic [x]
   (for [characteristic (:characteristc x)]
