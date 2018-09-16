@@ -29,69 +29,26 @@
          (attr= :profileTypeName "Unit")
          ))
 
-(extract-characteristics selections "T")
+(def ATTRIBUTES ["T" "BS" "Save"])
+(defn extract-attributes [node]
+  (for [a ATTRIBUTES]
+    (apply
+     #(xml-> %
+             :characteristics
+             :characteristic
+             (attr= :name a)
+             zip/node)
+     node)
+     ))
 
-(defn extract-characteristics [node c] 
+(defn map-attr [node]
+  (for [s (map #(zip/node %) (extract-attributes node))]
+    (select-keys (get-in (first s) [:attrs]) [:name :value])))
+
+
+(defn extract-characteristics [node] 
   [:name (:name (:attrs (zip/node (first node))))
-   (select-keys (:attrs (first (apply #(xml-> % :characteristics :characteristic (attr= :name c) zip/node) node))) [:name :value])])
-
-
-
-(defn extract-characteristics
-  [value]
-  (xml->
-   selections
-   :characteristics
-   :characteristic
-   ))
-
-(for [selection selections
-      :let [
-            c (xml->
-               selection
-               :characteristics
-               :characteristic
-               (attr= :name "WS")
-               zip/node)
-            ]]
-  c)
-
-(def map
-  {:units
-   [
-    {
-     :name (get-in (first selections) [:attrs :name])
-     :weapons (get-in (:content selections) [:tag])
-     }
-    ]
-   })
-
-(defn print-characteristic [x]
-  (for [characteristic (:characteristc x)]
-    (pprint characteristic)))
-
-(println "porco")
-
-(doall (pprint selections))
-
-(map #(pprint %) selections)
-
-(for [selection selections]
-      (pprint selection))
-
-
-;; (def models (xpath/lookup-nodeset "//selection[@type='model']" xml-file))
-;; (def weapons (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Weapon']" xml-file)))
-;; (def weapons-stats (map dom/attributes (xpath/lookup-nodeset "//selection[@type='model']//profile[@profileTypeName='Weapon']//characteristic" xml-file)))
-
-;; (def data (for [x (xml-seq
-;;                    (xml/parse (java.io.File. "test.ros" )))
-;;                 :when (= :selections (:tag x))]
-;;             (first (get-in x [:content]))))
-
-;; (doseq [x models] (println x))
-;; (doseq [x weapons] (println (:name x)))
-;; (doseq [x weapons-stats] (println (:name x) (:value x)))
+   :attrs [(map-attr node)]])
 
 (defn -main
   "I don't do a whole lot."
