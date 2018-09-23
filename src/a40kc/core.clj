@@ -7,7 +7,7 @@
 (require '[clojure.data.zip.xml :as zip-xml])
 (use 'clojure.data.zip.xml)
 
-(def data (zip/xml-zip (xml/parse "test.ros")))
+(def data (zip/xml-zip (xml/parse "test-1.ros")))
 
 (def selections
   (xml-> data
@@ -15,27 +15,24 @@
          :force
          :selections
          :selection
-         (attr= :type "model")
-         ))
+         (attr= :type "model")))
 
 (defn extract-attributes [node]
   (for [a ["T" "BS" "Save"]]
-    (apply
-     #(xml-> %
-             :profiles
-             :profile
-             (attr= :profileTypeName "Unit")
-             :characteristics
-             :characteristic
-             (attr= :name a)
-             zip/node)
-     node)
-     ))
+    (xml-> node
+           :profiles
+           :profile
+           (attr= :profileTypeName "Unit")
+           :characteristics
+           :characteristic
+           (attr= :name a))))
+
+(defn extract-name[node]
+  (:name (:attrs node)))
 
 (defn extract-weapons [node]
   (for [a ["Range" "Type" "S" "AP" "D"]]
-    (apply
-     #(xml-> %
+    (xml-> node
              :selections
              :selection
              :profiles
@@ -43,21 +40,21 @@
              (attr= :profileTypeName "Weapon")
              :characteristics
              :characteristic
-             (attr= :name a)
-             zip/node)
-     node)
+             (attr= :name a))
     ))
 
 (defn map-attr [f node]
   (for [s (f node)]
-    (select-keys (get-in (first s) [:attrs]) [:name :value])))
+    (select-keys (get-in (first (first s)) [:attrs]) [:name :value])))
 
 (defn extract-characteristics [node]
-  [:name (:name (:attrs (zip/node (first node))))
-   :attrs [(map-attr extract-attributes node)]
-   :wepons [(map-attr extract-weapons node)]
-   ]
-  )
+  (for [n node]
+    (do
+      (let
+          [name (:name (:attrs (zip/node n)))
+           weapons (map-attr extract-weapons n)
+           attributes (map-attr extract-attributes n)]
+        {:name name :weapons weapons :attributes attributes}))))
 
 (defn -main
   "I don't do a whole lot."
