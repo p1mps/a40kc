@@ -45,7 +45,9 @@
 
 (defn map-attr [f node]
   (for [s (f node)]
-    (select-keys (get-in (first (first s)) [:attrs]) [:name :value])))
+    (map
+     #(select-keys (get-in (first %) [:attrs]) [:name :value])
+     s)))
 
 (defn extract-characteristics [node]
   (for [n node]
