@@ -6,5 +6,4 @@
   :main a40kc.core
   :profiles {:uberjar {:aot :all}}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/data.zip "0.1.1"]
-                 [xenopath "0.1.2"]])
+                 [com.github.kyleburton/clj-xpath "1.4.3"]])

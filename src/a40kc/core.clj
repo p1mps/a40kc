@@ -1,64 +1,46 @@
 (ns a40kc.core
   (:gen-class))
 
-(require '[clojure.java.io :as io])
-(require '[clojure.xml :as xml])
-(require '[clojure.zip :as zip])
-(require '[clojure.data.zip.xml :as zip-xml])
-(use 'clojure.data.zip.xml)
+(use '[clj-xpath.core])
 
-(def data (zip/xml-zip (xml/parse "test-1.ros")))
 
-(def selections
-  (xml-> data
-         :forces
-         :force
-         :selections
-         :selection
-         (attr= :type "model")))
+(def data (slurp "test-1.ros"))
 
-(defn extract-attributes [node]
-  (for [a ["T" "BS" "Save"]]
-    (xml-> node
-           :profiles
-           :profile
-           (attr= :profileTypeName "Unit")
-           :characteristics
-           :characteristic
-           (attr= :name a))))
+(def xmldoc
+  (xml->doc data))
 
-(defn extract-name[node]
-  (:name (:attrs node)))
+(defn get-xml-values [node]
+  (select-keys (:attrs node) [:name :value]))
 
-(defn extract-weapons [node]
-  (for [a ["Range" "Type" "S" "AP" "D"]]
-    (xml-> node
-             :selections
-             :selection
-             :profiles
-             :profile
-             (attr= :profileTypeName "Weapon")
-             :characteristics
-             :characteristic
-             (attr= :name a))
-    ))
+(defn get-list-xml-values [list]
+  (map
+   #(select-keys (:attrs %) [:name :value]) list))
 
-(defn map-attr [f node]
-  (for [s (f node)]
-    (map
-     #(select-keys (get-in (first %) [:attrs]) [:name :value])
-     s)))
+(defn parse-weapons [xml]
+  (map
+   (fn [item] {:weapon_name
+         (get-xml-values item)
+         :values (get-list-xml-values ($x ".//characteristic" item))})
+   ($x
+    "./selections/selection/profiles/profile[@profileTypeName='Weapon']"
+    xml)))
 
-(defn extract-characteristics [node]
-  (for [n node]
-    (do
-      (let
-          [name (:name (:attrs (zip/node n)))
-           weapons (map-attr extract-weapons n)
-           attributes (map-attr extract-attributes n)]
-        {:name name :weapons weapons :attributes attributes}))))
+(defn create-data []
+  (map
+   (fn [item]
+     {:unit
+      (get-xml-values
+       item)
+      :unit-characteristic
+      (get-list-xml-values
+       ($x "./profiles/profile[@profileTypeName='Unit']//characteristic" item))
+      :unit-weapons
+      (parse-weapons item)
+      })
+   ($x "//selection[@type='model']" xmldoc)))
 
-(defn -main
-  "I don't do a whole lot."
-  [& args]
-  (extract-characteristics selections))
+(create-data)
+
+ (defn -main
+   "I don't do a whole lot."
+   [& args])
