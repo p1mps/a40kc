@@ -1,14 +1,11 @@
 # a40kc
 
-A Clojure library designed to ... well, that part is up to you.
+A 40k armies comparator tool
 
 ## Usage
 
-FIXME
+`java -jar target/a40kc-0.1.0-SNAPSHOT.jar armylist1.xml armylist2.xml`
 
-## License
+## Output
 
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+TBD
