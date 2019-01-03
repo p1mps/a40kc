@@ -3,11 +3,15 @@
 
 (use '[clj-xpath.core])
 
+(def xml-file1 (slurp "test-1.ros"))
 
-(def data (slurp "test-1.ros"))
+(def xml-file2 (slurp "test.ros"))
 
-(def xmldoc
-  (xml->doc data))
+(def data1
+  (xml->doc xml-file1))
+
+(def data2
+  (xml->doc xml-file2))
 
 (defn get-xml-values [node]
   (select-keys (:attrs node) [:name :value]))
@@ -18,29 +22,47 @@
 
 (defn parse-weapons [xml]
   (map
-   (fn [item] {:weapon_name
-         (get-xml-values item)
-         :values (get-list-xml-values ($x ".//characteristic" item))})
+   (fn [item]
+     {:weapon-name (get-xml-values item)
+      :values (get-list-xml-values ($x ".//characteristic" item))})
    ($x
     "./selections/selection/profiles/profile[@profileTypeName='Weapon']"
     xml)))
 
-(defn create-data []
-  (map
-   (fn [item]
-     {:unit
-      (get-xml-values
-       item)
-      :unit-characteristic
-      (get-list-xml-values
-       ($x "./profiles/profile[@profileTypeName='Unit']//characteristic" item))
-      :unit-weapons
-      (parse-weapons item)
-      })
-   ($x "//selection[@type='model']" xmldoc)))
+(defn parse-data [data]
+   (map
+    (fn [item]
+      {:unit-name
+       (get-xml-values item)
+       :unit-characteristics
+       (get-list-xml-values
+        ($x "./profiles/profile[@profileTypeName='Unit']//characteristic" item))
+       :unit-weapons
+       (parse-weapons item)
+       })
+    ($x "//selection[@type='model']" data)))
 
-(create-data)
+(defn read-file [file]
+  (parse-data (slurp file)))
 
- (defn -main
-   "I don't do a whole lot."
-   [& args])
+;;((6 - BS + 1) * 1/6) * 100
+(defn odds-shooting [BS]
+  (int (* 100 (* (+ (- 6 BS) 1) (/ 1 6.0)))))
+
+
+(def data-file
+  (read-file "test-1.ros"))
+
+(defn get-unit-characteristic [unit name]
+  (:unit-characteristics unit))
+
+(map
+ (fn [unit]
+   (do
+     (pprint (:unit-name unit))
+     (pprint (odds-shooting (get-unit-characteristic unit "BS")))))
+ data-file)
+
+;; ( -main
+;;   "I don't do a whole lot."
+;;   [& args])
