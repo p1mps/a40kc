@@ -3,7 +3,7 @@
 
 (use '[clj-xpath.core])
 
-(def xml-file1 (slurp "test-1.ros"))
+(def xml-file1 (slurp "test.ros"))
 
 (def xml-file2 (slurp "test.ros"))
 
@@ -51,15 +51,16 @@
 
 
 (def data-file
-  (read-file "test-1.ros"))
+  (read-file "test.ros"))
 
 (defn get-unit-characteristic [unit name]
-  (:unit-characteristics unit))
+  (:value (first (filter #(= (:name %) name) (:unit-characteristics unit)))))
 
 (map
  (fn [unit]
    (do
      (pprint (:unit-name unit))
+     (pprint (get-unit-characteristic unit "BS"))
      (pprint (odds-shooting (get-unit-characteristic unit "BS")))))
  data-file)
 
