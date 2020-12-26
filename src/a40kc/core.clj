@@ -11,17 +11,50 @@
 (def zipper
   (-> (.getBytes file)
       java.io.ByteArrayInputStream.
-      clojure.xml/parse clojure.zip/xml-zip))
+      xml/parse zip/xml-zip))
 
+(defn attrs-name [e]
+    (:name (:attrs e)))
+
+(defn attrs-and-content [e]
+  [(:name (:attrs e)) (:content e)])
+
+(defn content [e]
+  (first (:content e)))
 
 (def units
   (zx/xml->
    zipper
+   :roster
    :forces
    :force
    :selections
    :selection
    (zx/attr= :type "unit")))
+
+
+(defn parse-weapons [u]
+  (concat
+   (for [weapon (zx/xml-> u :profiles :profile)]
+                  (let [chars (zx/xml-> weapon :characteristics :characteristic)]
+                    {:name  (attrs-name (first weapon))
+                     :chars (map #(attrs-and-content (first %)) chars)}))
+
+
+   (for [weapon (zx/xml-> u :selections :selection (zx/attr= :type "upgrade") :selections :selection )]
+                  (let [chars (zx/xml-> weapon :profiles :profile :characteristics :characteristic)]
+                    {:name  (attrs-name (first weapon))
+                     :chars (map #(attrs-and-content (first %)) chars)}))
+   ))
+
+
+(defn parse-units []
+  (first (for [u units]
+           (for [m (zx/xml-> u :selections :selection)]
+             {:model       (attrs-name (first m))
+              :model-chars (map #(attrs-and-content (first %)) (zx/xml-> m :profiles :profile :characteristics :characteristic))
+              :weapons     (parse-weapons u)
+              }))))
 
 
 (defn unit->weapons-all-squad [loc]
@@ -35,6 +68,7 @@
   (-> loc
       zip/down
       zip/right
+      zip/children
 
       ))
 
@@ -62,14 +96,7 @@
   (remove nil? (map #(:name (:attrs %)) loc)))
 
 
-(defn attrs-name [e]
-    (:name (:attrs e)))
 
-(defn attrs-and-content [e]
-    [(:name (:attrs e) (:content e))])
-
-(defn content [e]
-  (first (:content e)))
 
 
 (defn parse-chars [chars]
@@ -80,23 +107,33 @@
 
 (defn parse-models [loc]
   (reduce (fn [result value]
-            (let [chars (-> loc zip/down zip/down zip/down zip/down zip/children)]
+            (let [chars (-> value zip/node)]
 
-              (conj result {:name (attrs-name (-> loc zip/down zip/node))
-                            :chars (parse-chars chars)})))
-          {}
+              (conj result chars)))
+          []
           loc))
 
 
-(clojure.pprint/pprint (for [u units]
-                         (let [models (unit->models u)]
-                           {:unit-name (attrs-name (first u))
-                            :models    (parse-models models)
-                            :weapons   (let [w  (unit->weapons-all-squad u)
-                                             w2 (chars-weapons-all-squad w)]
-                                         {:name   (parse-name w)
-                                          :chars  (parse w2)
-                                          })})))
+;; (let [models (unit->models u)]
+;;        (for [m models]
+
+;;          :name (attrs-name m)
+;;          :weapons   (let [w       (unit->weapons-all-squad u)
+;;                           w2      (chars-weapons-all-squad w)
+;;                           weapons (-> u
+;;                                       zip/down
+;;                                       zip/node
+;;                                       )]
+;;                       {:name  (parse-name w)
+;;                        :gg    weapons
+;;                        :chars (parse w2)
+;;                        })))
+
+(defn analyse []
+  (for [u units]
+    {:unit-name (attrs-name (zip/node u))
+     :models (parse-models (unit->models u))
+     }))
 
 
 
