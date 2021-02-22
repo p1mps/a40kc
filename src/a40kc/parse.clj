@@ -56,6 +56,38 @@
 ;;               :weapons     (parse-weapons u)
 ;;               }))))
 
+(defn weapons [model]
+  (let [weapons (zx/xml-> model
+                          :selections
+                          :selection
+                          :profiles
+                        :profile
+                        (zx/attr= :typeName "Weapon")
+                        )
+
+
+
+        ]
+    (reduce (fn [result w]
+              (conj result {:name (attrs-name (first w))
+                            :chars
+                            (->
+                             (map #(attrs-and-content (first %)) (zx/xml-> w :characteristics :characteristic))
+                             (keywordize-chars))
+
+                            })
+
+              )
+
+
+            []
+            weapons
+            )
+
+    ;;(map #(attrs-name (first %)) weapons)
+
+   ))
+
 (defn characteristics [model]
   (let [chars (zx/xml-> model
                         :profiles
@@ -90,6 +122,10 @@
    :selections
    :selection
    (zx/attr= :type "unit")))
+
+
+
+
 
 
 (defn forces [zipper]

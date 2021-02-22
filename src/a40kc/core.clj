@@ -9,18 +9,19 @@
 
 (def forces (parse/forces zipper))
 
-(def parsed
-    (for [f forces]
-      {:force-name (parse/attrs-name  (first f))
-       :units (for [u (parse/units f)]
-                {:name
-                 (parse/attrs-name (first u))
-                 :models (for [m (parse/models u)]
-                           {:name (parse/attrs-name (first m))
-                            :number (:number (:attrs (first m)))
-                            :chars (parse/characteristics  m)})
+(for [f forces]
+  {:force-name (parse/attrs-name  (first f))
+   :units      (for [u (parse/units f)]
+                 {:name
+                  (parse/attrs-name (first u))
+                  :models (for [m (parse/models u)]
+                            {:name    (parse/attrs-name (first m))
+                             :number  (:number (:attrs (first m)))
+                             :chars   (parse/characteristics  m)
+                             :weapons (parse/weapons m)
+                             })
 
-                 })}))
+                  })})
 
 (comment
 
