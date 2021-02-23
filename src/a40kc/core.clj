@@ -9,19 +9,24 @@
 
 (def forces (parse/forces zipper))
 
-(for [f forces]
-  {:force-name (parse/attrs-name  (first f))
-   :units      (for [u (parse/units f)]
-                 {:name
-                  (parse/attrs-name (first u))
-                  :models (for [m (parse/models u)]
-                            {:name    (parse/attrs-name (first m))
-                             :number  (:number (:attrs (first m)))
-                             :chars   (parse/characteristics  m)
-                             :weapons (parse/weapons m)
-                             })
+(defn edn [forces]
+  (for [f forces]
+    {:force-name (parse/attrs-name  (first f))
+     :units      (for [u (parse/units f)]
+                   {:name
+                    (parse/attrs-name (first u))
+                    :models (for [m (parse/models u)]
+                              {:name    (parse/attrs-name (first m))
+                               :number  (:number (:attrs (first m)))
+                               :chars   (parse/characteristics  m)
+                               :weapons (parse/weapons m)})})}))
 
-                  })})
+(defn file->edn [file]
+  (-> (slurp file)
+   parse/zipper
+   parse/forces
+   edn))
+
 
 (comment
 

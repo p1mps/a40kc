@@ -24,6 +24,24 @@
      :abilities "-"}}
    )})
 
+(def conscripts
+  {:name "Conscripts",
+   :models
+   (list {:name   "Conscript",
+     :number "20",
+     :chars
+     {:ws 5, :ld 4, :w 1, :m 6, :save 5, :s 3, :bs 5, :t 3, :a 1},
+     :weapons
+     [{:name "Lasgun",
+       :chars
+       {:range     24,
+        :type      "Rapid",
+        :s         3,
+        :ap        0,
+        :d         1,
+        :abilities -}}]})})
+
+
 (defn d6-odds [n]
   (double (/ (- 7 n) 6)))
 

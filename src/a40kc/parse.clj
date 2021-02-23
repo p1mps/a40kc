@@ -6,7 +6,9 @@
    [clojure.data.zip.xml :as zx]))
 
 (defn parse-char [char]
-  (read-string (str (clojure.string/replace char "+" ""))))
+  (if (= (count char) 1)
+    (read-string (str (clojure.string/replace char "+" "")))
+    char))
 
 (defn attrs-name [e]
     (:name (:attrs e)))
@@ -23,7 +25,6 @@
 
 (defn keywordize-chars [chars]
   (reduce (fn [result value]
-
             (assoc result (keywordize (first value)) (parse-char (second value))))
           {}
           chars))
