@@ -1,28 +1,44 @@
 (ns a40kc.fight)
 
-(def spacemarine
-  {:model "Space marine",
-   :number 9
-  :model-chars
-  {:ws "3+",
-   :ld "6",
-   :w "1",
-   :m "6\"",
-   :save "3+",
-   :s "4",
-   :bs "3+",
-   :t "4",
-   :a "1"},
-  :weapons
-  (list {:name "Bolter",
-    :chars
-    {:range "24",
-     :type "Rapid fire 1",
-     :s "4",
-     :ap "0",
-     :d "1",
-     :abilities "-"}}
-   )})
+(def spacemarines
+  {:name "Tactical Squad",
+    :models
+    (list {:name "Space Marine",
+      :number "4",
+      :chars {},
+      :weapons
+      [{:name "Boltgun",
+        :chars
+        {:range "24\"",
+         :type "Rapid Fire 1",
+         :s 4,
+         :ap 0,
+         :d 1,
+         :abilities -}}
+       {:name "Frag grenades",
+        :chars
+        {:range "6\"",
+         :type "Grenade D6",
+         :s 3,
+         :ap 0,
+         :d 1,
+         :abilities "Blast."}}
+       {:name "Krak grenades",
+        :chars
+        {:range "6\"",
+         :type "Grenade 1",
+         :s 6,
+         :ap "-1",
+         :d "D3",
+         :abilities -}}
+       {:name "Bolt pistol",
+        :chars
+        {:range "12\"",
+         :type "Pistol 1",
+         :s 4,
+         :ap 0,
+         :d 1,
+         :abilities -}}]})})
 
 (def conscripts
   {:name "Conscripts",
@@ -40,6 +56,25 @@
         :ap        0,
         :d         1,
         :abilities -}}]})})
+
+
+(def fight
+  {:attacker "Conscripts"
+   :defender "Tactical Squad"
+   :weapons [{:name "lasgun"
+              :wounds 0
+              :wounds-rf 0
+              :wounds-frsf 0}]})
+
+
+(defn fight-models [m1 m2]
+  {:attacker (:name m1)
+   :defender (:name m2)
+   :weapons (for [w (:weapons m1)]
+              )
+
+
+   })
 
 
 (defn d6-odds [n]
