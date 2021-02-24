@@ -2,7 +2,7 @@
   (:require
    [clojure.zip :as zip]
    [clojure.xml :as xml]
-   [clojure.java.io :refer [file output-stream input-stream] :as io]
+   [clojure.java.io :refer [file] :as io]
 
    [clojure.data.zip :as zd]
    [clojure.data.zip.xml :as zx])
@@ -93,28 +93,28 @@
                  :profiles
                  :profile
                  (zx/attr= :typeName "Weapon"))]
-    (map (fn [e]
-           {:name (attrs-name (first e))
-            :chars
-            (->
-             (map #(attrs-and-content (first %)) (zx/xml-> e :characteristics :characteristic))
-             (keywordize-chars))}) weapons)
+    ;; (map (fn [e]
+    ;;        {:name (attrs-name (first e))
+    ;;         :chars
+    ;;         (->
+    ;;          (map #(attrs-and-content (first %)) (zx/xml-> e :characteristics :characteristic))
+    ;;          (keywordize-chars))}) weapons)
 
-    ;; (reduce (fn [result w]
-    ;;           (conj result {:name (attrs-name (first w))
-    ;;                         :chars
-    ;;                         (->
-    ;;                          (map #(attrs-and-content (first %)) (zx/xml-> w :characteristics :characteristic))
-    ;;                          (keywordize-chars))
+    (reduce (fn [result w]
+              (conj result {:name (attrs-name (first w))
+                            :chars
+                            (->
+                             (map #(attrs-and-content (first %)) (zx/xml-> w :characteristics :characteristic))
+                             (keywordize-chars))
 
-    ;;                         })
+                            })
 
-    ;;           )
+              )
 
 
-    ;;         []
-    ;;         weapons
-    ;;         )
+            []
+            weapons
+            )
 
     ;;(map #(attrs-name (first %)) weapons)
 
@@ -130,7 +130,7 @@
      (map #(attrs-and-content (first %)) chars)
      (keywordize-chars))))
 
-(defn models [unit]
+(defn unit-models [unit]
   (zx/xml->
    unit
    :selections
@@ -152,6 +152,13 @@
    :selection
    (zx/attr= :type "unit")))
 
+(defn models [force]
+  (zx/xml->
+   force
+   :selections
+   :selection
+   (zx/attr= :type "model")))
+
 
 (defn forces [zipper]
   (zx/xml->
@@ -171,13 +178,19 @@
 (defn edn [forces]
   (for [f forces]
     {:force-name (attrs-name  (first f))
+     :models (for [m (models f)]
+               {:name    (attrs-name (first m))
+                :number  (:number (:attrs (first m)))
+                :chars   (characteristics  m)
+                :weapons (weapons m)})
+
      :units      (for [u (units f)]
                    {:name
                     (attrs-name (first u))
-                    :models (for [m (models u)]
+                    :models (for [m (unit-models u)]
                               {:name    (attrs-name (first m))
                                :number  (:number (:attrs (first m)))
-                               :chars   (characteristics  m)
+                               :chars   (characteristics  u)
                                :weapons (weapons m)})})}))
 
 (defn file->edn [file]
