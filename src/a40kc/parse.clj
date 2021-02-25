@@ -180,7 +180,7 @@
     {:force-name (attrs-name  (first f))
      :models (for [m (models f)]
                {:name    (attrs-name (first m))
-                :number  (:number (:attrs (first m)))
+                :number  (read-string (:number (:attrs (first m))))
                 :chars   (characteristics  m)
                 :weapons (weapons m)})
 
@@ -189,7 +189,7 @@
                     (attrs-name (first u))
                     :models (for [m (unit-models u)]
                               {:name    (attrs-name (first m))
-                               :number  (:number (:attrs (first m)))
+                               :number  (read-string (:number (:attrs (first m))))
                                :chars   (characteristics  u)
                                :weapons (weapons m)})})}))
 
@@ -210,6 +210,7 @@
 (comment
 
   (parse "spacemarines.rosz")
+
 
 
   (unzip-file "spacemarines.rosz" "spacemarines.ros")
