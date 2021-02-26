@@ -34,8 +34,10 @@
 
 
 (defn parse-char [char]
-  (if (= (count char) 1)
-    (read-string (str (clojure.string/replace char "+" "")))
+  (cond
+    (clojure.string/includes? char "-") (- (read-string (str (clojure.string/replace char "-" ""))))
+    (clojure.string/includes? char "+") (- (read-string (str (clojure.string/replace char "=" ""))))
+    :else
     char))
 
 (defn attrs-name [e]
