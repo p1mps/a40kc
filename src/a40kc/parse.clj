@@ -35,8 +35,8 @@
 
 (defn parse-char [char]
   (cond
-    (clojure.string/includes? char "-") (- (read-string (str (clojure.string/replace char "-" ""))))
-    (clojure.string/includes? char "+") (- (read-string (str (clojure.string/replace char "=" ""))))
+    (and (> (count char) 1) (clojure.string/includes? char "-")) (- (read-string (str (clojure.string/replace char "-" ""))))
+    (clojure.string/includes? char "+") (read-string (str (clojure.string/replace char "+" "")))
     :else
     char))
 
@@ -226,7 +226,7 @@
   (def forces (forces zipper))
 
 
-  (file->edn "spacemarines.ros")
+  (parse "spacemarines.rosz")
 
 
  ,)
